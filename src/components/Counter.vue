@@ -1,5 +1,20 @@
-<script setup></script>
+<script setup>
+import { userCounter } from '@/composables/userCounter.js'
 
-<template></template>
+const {count, increment} = userCounter()
 
-<style scoped></style>
+</script>
+
+<template>
+  <div class="counter">
+    <h2>Increment Number</h2>
+    <p class="show">{{count}}</p>
+    <button v-on:click="increment"></button>
+  </div>
+</template>
+
+<style scoped>
+.counter {
+  text-align: center;
+}
+</style>
