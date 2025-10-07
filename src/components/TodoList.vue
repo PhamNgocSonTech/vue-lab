@@ -4,11 +4,13 @@ import { userCounter } from '@/composables/userCounter.js'
 
 import { useTodoStore } from '@/stores/todoStore.js'
 import { computed } from 'vue'
+import TodoItem from '@/components/TodoItem.vue'
 
 
 const todoStore = useTodoStore()
 
 const { count, increment } = userCounter()
+
 
 
 
@@ -28,8 +30,7 @@ const deleteTodo = (id) => {
     <button @click="addTodo">Add</button>
     <ul class="todo-list">
       <li v-for="item in todoStore.todos" :key="item.id" class="todo-item">
-        {{ item.todo }}
-        <button @click="deleteTodo(item.id)">Delete</button>
+        <TodoItem :todo="item" @remove-todo="deleteTodo(item.id)"/>
       </li>
     </ul>
     <div class="counter">{{ count }}</div>
