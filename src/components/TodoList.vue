@@ -1,55 +1,38 @@
 <script setup>
 
-import { computed, reactive } from 'vue'
+import { userCounter } from '@/composables/userCounter.js'
 
-import {userCounter} from '@/composables/userCounter.js'
+import { useTodoStore } from '@/stores/todoStore.js'
+import { computed } from 'vue'
 
-const todoReactive = reactive({
-  todos: [
-    {
-      id: 1,
-      todo: 'to do 1',
-      completed: false,
-    },
 
-    {
-      id: 2,
-      todo: 'to do 2',
-      completed: false,
-    },
+const todoStore = useTodoStore()
 
-    {
-      id: 3,
-      todo: 'to do 3',
-      completed: true,
-    },
+const { count, increment } = userCounter()
 
-    {
-      id: 4,
-      todo: 'to do 4',
-      completed: true,
-    }
-  ]
-})
 
-const {count, increment} = userCounter()
 
-const totalTodos = computed(() => {
-  return todoReactive.todos.length
-})
+const addTodo = () => {
+  todoStore.addToDo()
+}
+
+const deleteTodo = (id) => {
+  todoStore.deleteTodo(id)
+}
 </script>
 
 <template>
   <div class="wrapper">
-    <h2 class="todo-heading">To Do ({{totalTodos}})</h2>
-    <input class="todo-input" type="text" placeholder="Input Your Todo">
-    <button>Add</button>
+    <h2 class="todo-heading">To Do ({{ todoStore.getTotal }})</h2>
+    <input v-model="todoStore.newTodo" class="todo-input" type="text" placeholder="Input Your Todo" />
+    <button @click="addTodo">Add</button>
     <ul class="todo-list">
-      <li v-for="item in todoReactive.todos" :key="item.id" class="todo-item">{{item.todo}}
-        <button>Delete</button>
+      <li v-for="item in todoStore.todos" :key="item.id" class="todo-item">
+        {{ item.todo }}
+        <button @click="deleteTodo(item.id)">Delete</button>
       </li>
     </ul>
-    <div class="counter">{{count}}</div>
+    <div class="counter">{{ count }}</div>
     <button class="counter-btn" @click="increment">Increment</button>
   </div>
 </template>
