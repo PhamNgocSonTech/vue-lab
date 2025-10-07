@@ -1,15 +1,15 @@
 <script setup>
-import { userCounter } from '@/composables/userCounter.js'
+import {useCounterStore} from '@/stores/counter.js'
 
-const {count, increment} = userCounter()
+const counterStore = useCounterStore()
 
 </script>
 
 <template>
   <div class="counter">
     <h2>Increment Number</h2>
-    <p class="show">{{count}}</p>
-    <button v-on:click="increment"></button>
+    <p class="show">{{counterStore.count}}</p>
+    <button v-on:click="counterStore.increment()">Increment</button>
   </div>
 </template>
 

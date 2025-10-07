@@ -44,11 +44,10 @@ const totalTodos = computed(() => {
     <h2 class="todo-heading">To Do ({{totalTodos}})</h2>
     <input class="todo-input" type="text" placeholder="Input Your Todo">
     <button>Add</button>
-    <button>Delete</button>
     <ul class="todo-list">
-      <li class="todo-item">{{todoReactive.todos[0].todo}}</li>
-      <li class="todo-item">{{todoReactive.todos[1].todo}}</li>
-      <li class="todo-item">{{todoReactive.todos[2].todo}}</li>
+      <li v-for="item in todoReactive.todos" :key="item.id" class="todo-item">{{item.todo}}
+        <button>Delete</button>
+      </li>
     </ul>
     <div class="counter">{{count}}</div>
     <button class="counter-btn" @click="increment">Increment</button>
