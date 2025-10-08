@@ -1,5 +1,10 @@
 <script setup></script>
 
-<template></template>
+<template>
+  <div class="card">
+    <h3>This is card component</h3>
+    <slot></slot>
+  </div>
+</template>
 
 <style scoped></style>

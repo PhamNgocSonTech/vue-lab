@@ -1,5 +1,10 @@
 <script setup>
 import { RouterLink, RouterView } from 'vue-router'
+import PostList from '@/components/PostList.vue'
+import Card from '@/components/Card.vue'
+import Child from '@/components/Parent.vue'
+import Parent from '@/components/Parent.vue'
+import User from '@/components/User.vue'
 </script>
 
 <template>
@@ -10,11 +15,17 @@ import { RouterLink, RouterView } from 'vue-router'
 
       <nav>
         <RouterLink to="/">Home</RouterLink>
+        <RouterLink to="/users">Users</RouterLink>
+        <RouterLink to="/post">Post</RouterLink>
         <RouterLink to="/about">About</RouterLink>
       </nav>
     </div>
   </header>
+  <Card>
+    <p>Content in App.vue</p>
+  </Card>
 
+  <Parent/>
   <RouterView />
 </template>
 
